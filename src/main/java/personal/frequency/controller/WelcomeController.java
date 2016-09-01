@@ -4,41 +4,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import personal.frequency.model.CurrencyConverter;
-import personal.frequency.model.Registration;
+import personal.frequency.model.User;
+import personal.frequency.service.UserService;
 
 @Controller
 public class WelcomeController {
 
-	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
-	public ModelAndView welcome() {
-		ModelAndView model = new ModelAndView("welcome");
-		return model;
-	}
-
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public ModelAndView adminPage() {
-		ModelAndView model = new ModelAndView("admin");
-		model.addObject("title", "Now you are admin!");
-		model.addObject("message", "You can delete any entity recording!");
-		return model;
-	}
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "logout", required = false) String logout) {
-		ModelAndView model = new ModelAndView("login", "Registration", new Registration());
+		ModelAndView model = new ModelAndView("login", "User", new User());
 		if (error != null) {
 			model.addObject("error", "Invalid username and password!");
 		}
@@ -55,15 +44,16 @@ public class WelcomeController {
 		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return "redirect:/login?logout";// You can redirect wherever you want, but generally it's a good practice to show login screen again.
+		return "redirect:/login?logout";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView register(@Valid @ModelAttribute Registration registration, BindingResult bindingResult) {
-		ModelAndView model = new ModelAndView("currencyConverter", "CurrencyConverter", new CurrencyConverter());
+	public String register(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+		//ModelAndView model = new ModelAndView("currencyConverter", "CurrencyConverter", new CurrencyConverter());
 		if (!bindingResult.hasErrors()) {
-			return model;
+			userService.save(user);
+			return "redirect:/currencyConverter.htm";
 		}
-		return new ModelAndView("login", "Registration", registration);
+		return "redirect:/login?logout";
 	}
 }

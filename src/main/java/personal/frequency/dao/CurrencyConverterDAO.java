@@ -8,5 +8,5 @@ public interface CurrencyConverterDAO {
 
 	public void save(CurrencyConverter currencyConverter);
 	
-	public List<CurrencyConverter> getConversionResultsByUser(Integer userId);
+	public List<CurrencyConverter> getConversionResultsByUser(String username);
 }

@@ -24,7 +24,7 @@ public class CurrencyConverter {
 	private BigDecimal amountToConvert;
 	private BigDecimal convertedAmount;
 	private Date date;
-	private Integer userId;
+	private String username;
 	private Map<String, Double> rates;
 
 	public CurrencyConverter() {
@@ -35,7 +35,7 @@ public class CurrencyConverter {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ID", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return id;
 	}
@@ -44,7 +44,7 @@ public class CurrencyConverter {
 		this.id = id;
 	}
 
-	@Column(name = "FROM_CURRENCY")
+	@Column(name = "fromcurrency")
 	public String getFromCurrency() {
 		return fromCurrency;
 	}
@@ -53,7 +53,7 @@ public class CurrencyConverter {
 		this.fromCurrency = fromCurrency;
 	}
 
-	@Column(name = "TO_CURRENCY")
+	@Column(name = "tocurrency")
 	public String getToCurrency() {
 		return toCurrency;
 	}
@@ -62,7 +62,7 @@ public class CurrencyConverter {
 		this.toCurrency = toCurrency;
 	}
 
-	@Column(name = "AMOUNT_TO_CONVERT")
+	@Column(name = "amountoconvert")
 	public BigDecimal getAmountToConvert() {
 		return amountToConvert;
 	}
@@ -71,7 +71,7 @@ public class CurrencyConverter {
 		this.amountToConvert = amountToConvert;
 	}
 
-	@Column(name = "CONVERTED_AMOUNT")
+	@Column(name = "convertedamount")
 	public BigDecimal getConvertedAmount() {
 		return convertedAmount;
 	}
@@ -80,7 +80,7 @@ public class CurrencyConverter {
 		this.convertedAmount = convertedAmount;
 	}
 
-	@Column(name = "DATE")
+	@Column(name = "date")
 	public Date getDate() {
 		return date;
 	}
@@ -89,13 +89,13 @@ public class CurrencyConverter {
 		this.date = date;
 	}
 
-	@Column(name = "USER_ID")
-	public Integer getUserId() {
-		return userId;
+	@Column(name = "username")
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@Transient
@@ -109,17 +109,18 @@ public class CurrencyConverter {
 
 	@Override
 	public String toString() {
-		return "CurrencyConverter [id=" + id + ", fromCurrency=" + fromCurrency + ", toCurrency=" + toCurrency + ", amountToConvert=" + amountToConvert + ", convertedAmount=" + convertedAmount + ", date=" + date + ", rates=" + rates + "]";
+		return "CurrencyConverter [id=" + id + ", fromCurrency=" + fromCurrency + ", toCurrency=" + toCurrency + ", amountToConvert=" + amountToConvert + ", convertedAmount=" + convertedAmount + ", date=" + date + ", username=" + username + ", rates=" + rates + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((convertedAmount == null) ? 0 : convertedAmount.hashCode());
 		result = prime * result + ((fromCurrency == null) ? 0 : fromCurrency.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((toCurrency == null) ? 0 : toCurrency.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -132,10 +133,10 @@ public class CurrencyConverter {
 		if (getClass() != obj.getClass())
 			return false;
 		CurrencyConverter other = (CurrencyConverter)obj;
-		if (date == null) {
-			if (other.date != null)
+		if (convertedAmount == null) {
+			if (other.convertedAmount != null)
 				return false;
-		} else if (!date.equals(other.date))
+		} else if (!convertedAmount.equals(other.convertedAmount))
 			return false;
 		if (fromCurrency == null) {
 			if (other.fromCurrency != null)
@@ -151,6 +152,11 @@ public class CurrencyConverter {
 			if (other.toCurrency != null)
 				return false;
 		} else if (!toCurrency.equals(other.toCurrency))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}

@@ -13,5 +13,5 @@ public interface CurrencyConverterService {
 	
 	public void saveSearchResults(CurrencyConverter currencyConverter);
 
-	public List<CurrencyConverter> getConversionResults(Integer userId);
+	public List<CurrencyConverter> getConversionResults(String username);
 }

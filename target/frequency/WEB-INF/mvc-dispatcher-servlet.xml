@@ -25,15 +25,9 @@
 		</property>
 	</bean>
 
-	<bean id="registrationDAO" class="personal.frequency.dao.impl.RegistrationDAOImpl"></bean>
-    <bean id="currencyConverterDAO" class="personal.frequency.dao.impl.CurrencyConverterDAOImpl"></bean>
+	<!-- <bean id="userDAO" class="personal.frequency.dao.impl.UserDAOImpl"></bean>
+    <bean id="currencyConverterDAO" class="personal.frequency.dao.impl.CurrencyConverterDAOImpl"></bean> -->
  
-    <!-- <tx:annotation-driven /> -->
-    <!-- <bean id="transactionManager"
-        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean> -->
-    
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"></bean>
     
     <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>

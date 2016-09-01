@@ -23,15 +23,15 @@ public class CurrencyConverterDAOImpl extends CustomHibernateDaoSupport implemen
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<CurrencyConverter> getConversionResultsByUser(final Integer userId) {
+	public List<CurrencyConverter> getConversionResultsByUser(final String username) {
 		List<CurrencyConverter> list = (List<CurrencyConverter>)getHibernateTemplate().execute(new HibernateCallback<Object>() {
 			@Override
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
 				StringBuilder hql = new StringBuilder();
 				hql.append(" select res from CurrencyConverter res ");
-				hql.append(" where res.userId = :userIdParam");
+				hql.append(" where res.username = :usernameParam");
 				Query query = session.createQuery(hql.toString());
-				query.setParameter("userIdParam", userId);
+				query.setParameter("usernameParam", username);
 				return query.list();
 			}
 		});

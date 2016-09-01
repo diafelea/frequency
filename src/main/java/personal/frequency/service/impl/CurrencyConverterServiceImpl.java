@@ -41,11 +41,11 @@ public class CurrencyConverterServiceImpl implements CurrencyConverterService {
 	}
 	
 	public void saveSearchResults(CurrencyConverter currencyConverter) {
-		currencyConverter.setUserId(1);
+		currencyConverter.setUsername(currencyConverter.getUsername());
 		currencyConverterDAO.save(currencyConverter);
 	}
 
-	public List<CurrencyConverter> getConversionResults(Integer userId) {
-		return currencyConverterDAO.getConversionResultsByUser(userId);
+	public List<CurrencyConverter> getConversionResults(String username) {
+		return currencyConverterDAO.getConversionResultsByUser(username);
 	}
 }

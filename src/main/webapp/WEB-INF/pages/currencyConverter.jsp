@@ -3,6 +3,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
  <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -33,6 +35,8 @@
   </div>
  </div>
 </body>
+<sec:authentication var="user" property="principal" />
+<sec:authorize access="hasRole('ROLE_USER') and isAuthenticated()">
 
 <div class="row">
 <div class="col-xs-5 col-sm-5 col-md-5 col-md-offset-3">
@@ -65,6 +69,7 @@
 	 
 	 <form:form id="currencyConverter" action="convert.htm" method="POST" modelAttribute="CurrencyConverter">
      <form:hidden path="id" />
+	 <c:set var="now" value="<%=new java.util.Date()%>" />
       <legend>Currency Converter</legend>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
        <div class="form-group">
@@ -120,12 +125,43 @@
 		</div>
 	  </div> 
      </form:form>
-	 
-	 
+	
+	 <div id="content">
+	 <legend>History</legend>
+	 <div class="col-md-12" >
+ 
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>From currency</th>
+        <th>To currency</th>
+        <th>Amount</th>
+		<th>Result</th>
+		<th>Date</th>
+      </tr>
+    </thead>
+	<tbody>
+	
+	
+	
+	<c:forEach var="result" items="${results}" varStatus="counter">
+							<tr>
+								 <td>${result.fromCurrency}</td>
+								 <td>${result.toCurrency}</td>
+								 <td>${result.amountToConvert}</td>
+								 <td>${result.convertedAmount}</td>
+								 <td><fmt:formatDate type="date" value="${result.date}" /></td>
+							</tr>
+						</c:forEach>
+							</tbody>
+							
+  </table>
+</div>
+	 </div>
   </div>
  
  </div> 
 </div>
 </div>
-
+</sec:authorize>
 </html>
