@@ -1,217 +1,131 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="ForEx">
-<head>
-<meta charset="UTF-8">
-<title>Currency Converter in Angular</title>
-<!-- Latest compiled and minified CSS & JS -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-</head>
-<body>
-	<div class="container">
-		<div class="page-header">
-			<h1>Frequency</h1>
-		</div>
-	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.30/angular.min.js"></script>
-</body>
-
-<div class="row">
-	<div class="col-xs-5 col-sm-5 col-md-5 col-md-offset-3">
-		<div class="panel panel-default" data-ng-controller="ConvertCtrl">
-			<div class="panel-body">
-				<form action="" method="POST" role="form">
-					<legend>Currency Converter</legend>
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<div class="form-group">
-							<label for="">From</label> <select ng-model="fromType"
-								class="form-control" required data-ng-change="forExConvert()"
-								ng-options="k for (k, v) in rates track by v">
-								<option value="">--Select--</option>
-							</select>
-
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<div class="form-group">
-							<label for="">To</label> <select ng-model="toType"
-								class="form-control" required data-ng-change="forExConvert()"
-								ng-options="k for (k, v) in rates track by v">
-								<option value="">--Select--</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<div class="form-group">
-							<label for="">From Value</label> <input type="number"
-								class="form-control" placeholder="Enter value"
-								data-ng-model="fromValue" data-ng-change="forExConvert()">
-						</div>
-					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<div class="form-group">
-							<label for="">To Value</label> <input type="text"
-								class="form-control" placeholder="Enter value"
-								data-ng-model="toValue" data-ng-change="forExConvert()">
-						</div>
-					</div>
-
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-
-<script>
-	angular.module('ForEx', []).controller(
-			'ConvertCtrl',
-			[
-					'$scope',
-					'$http',
-					function($scope, $http) {
-						var base = this;
-						$scope.rates = {};
-						$http.get('http://api.fixer.io/latest?base=ZAR').then(
-								function(res) {
-									$scope.rates = res.data.rates;
-									$scope.toType = $scope.rates.INR;
-									$scope.fromType = $scope.rates.USD;
-									$scope.fromValue = 1;
-									$scope.forExConvert();
-								});
-						$scope.forExConvert = function() {
-							$scope.toValue = $scope.fromValue
-									* ($scope.toType * (1 / $scope.fromType));
-							$scope.toValue = $scope.toValue;
-						};
-					} ]);
-</script>
-
-</html>
-
-
-<%-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en">
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
-<!-- <link rel="stylesheet" href="/resources/demos/style.css" /> -->
+ <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<link
-	href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800|Open+Sans+Condensed:300,700"
-	rel="stylesheet" />
-<link href="resources/default.css" rel="stylesheet" type="text/css"
-	media="all" />
-<link href="resources/fonts.css" rel="stylesheet" type="text/css"
-	media="all" />
-	 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.30/angular.min.js"></script>
- <script type="text/javascript" src="C:\personal\projects\bitbucket\frequency\src\main\webapp\app\app.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+
+<%@page session="true"%>
+<script>
+	function formSubmit() {
+		document.getElementById("logoutForm").submit();
+	}
+
+	$(function () {
+		$('#datetimepicker1').datetimepicker();
+	});
+</script>
+
 </head>
 <body>
-<div id="logo" class="container">
-	<h1><span class="icon icon-lock icon-size"></span><a href="#">Freq<span>uency</span></a></h1>
-	<p>Your personal financial <a href="http://templated.co" rel="nofollow">CONSULTANT</a></p>
-</div>
-<div id="wrapper" class="container">
-	<div id="menu" class="container">
-		<ul>
-			<li><a href="#" accesskey="1" title="">Homepage</a></li>
-			<li class="current_page_item"><a href="#" accesskey="1" title="">Currency Converter</a></li>
-			<li><a href="#" accesskey="2" title="">Trends</a></li>
-			<li><a href="#" accesskey="3" title="">Solutions for Business</a></li>
-			<li><a href="#" accesskey="4" title="">Resources</a></li>
-			<li><a href="#" accesskey="5" title="">Contact Us</a></li>
-		</ul>
-	</div>
-	
-	
-</div>
-
  <div class="container">
   <div class="page-header">
-    <h1>NG ForEx</h1>
+    <h1>Frequency</h1>
   </div>
  </div>
-
+</body>
 
 <div class="row">
 <div class="col-xs-5 col-sm-5 col-md-5 col-md-offset-3">
  <div class="panel panel-default" data-ng-controller="ConvertCtrl">
   <div class="panel-body">
-     <form action="" method="POST" role="form">
+     
+	 <div id="content">
+			<div class="box">
+				<div id="login-box">	 
+				    <c:if test="${not empty error}">
+						<div class="error">${error}</div>
+					</c:if>
+					<c:if test="${not empty msg}">
+						<div class="msg">${msg}</div>
+					</c:if>
+					<c:url value="/j_spring_security_logout" var="logoutUrl" />
+					<!-- csrt for log out-->
+					<form action="${logoutUrl}" method="post" id="logoutForm">
+					  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					</form>
+					<c:if test="${pageContext.request.userPrincipal.name != null}">
+						<h5>
+							Welcome : ${pageContext.request.userPrincipal.name} | <a href="javascript:formSubmit()"> Logout</a>
+						</h5>
+					</c:if>
+				</div>	
+			</div>
+			<br class="clearfix" />
+		</div>
+	 
+	 <form:form id="currencyConverter" action="convert.htm" method="POST" modelAttribute="CurrencyConverter">
+     <form:hidden path="id" />
       <legend>Currency Converter</legend>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
        <div class="form-group">
-        <label for="">From</label>
-         <select 
-          ng-model="fromType" 
-          class="form-control"  
-          required  
-          data-ng-change="forExConvert()"
-          ng-options="k for (k, v) in rates track by v">
-          <option value="">--Select--</option>
-         </select>
+        <label for="">Currency I Have:</label>
+		
+		<form:select path="fromCurrency" class="form-control">
+		    <option selected>EUR</option>
+			<form:options items="${currencies}" value="${CurrencyConverter.fromCurrency}" />
+		</form:select>
           
        </div> 
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
        <div class="form-group">
-        <label for="">To</label>
-        <select 
-          ng-model="toType" 
-          class="form-control"  
-          required  
-          data-ng-change="forExConvert()"
-          ng-options="k for (k, v) in rates track by v">
-          <option value="">--Select--</option>
-         </select>
+        <label for="">Currency I Want:</label>
+        <form:select path="toCurrency" class="form-control">
+			<option selected>USD</option>
+			<form:options items="${currencies}" value="${CurrencyConverter.toCurrency}"/>
+		</form:select>
        </div> 
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
        <div class="form-group">
-        <label for="">From Value</label>
-        <input type="number" 
-        class="form-control"  
-        placeholder="Enter value" 
-        data-ng-model="fromValue"
-        data-ng-change="forExConvert()">
+        <label for="">Amount:</label>
+		<form:input path="amountToConvert" value="${CurrencyConverter.amountToConvert}" class="form-control" placeholder="I have this much to change" required="required" id="btngrp-search1" />
        </div> 
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
        <div class="form-group">
-        <label for="">To Value</label>
-        <input type="text" 
-        class="form-control"  
-        placeholder="Enter value" 
-        data-ng-model="toValue"
-        data-ng-change="forExConvert()">
+        <label for="">Amount:</label>
+        <form:input path="convertedAmount" value="${CurrencyConverter.convertedAmount}" class="form-control" placeholder="I want to buy smth at this price" id="btngrp-search1" />
        </div> 
       </div>
-      
-     </form>
+	  
+	  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	  </div>
+	  
+	  
+	  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	   <div class="form-group">
+	     <label for="">Date:</label>
+                <div class='input-group date' id='datetimepicker1'>
+                    <form:input path="date" class="form-control" value="${CurrencyConverter.date}"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+	   </div> 
+	  <div>
+	   <div class="form-group">
+		<button id="submit" name="submit" class="btn btn-primary">Convert</button>
+		</div>
+	  </div> 
+     </form:form>
+	 
+	 
   </div>
+ 
  </div> 
 </div>
 </div>
-	
 
-<div id="copyright">
-	<p>&copy; Untitled. All rights reserved. | Photos by <a href="http://fotogrph.com/">Fotogrph</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p>
-</div>
-</body>
 </html>
- --%>

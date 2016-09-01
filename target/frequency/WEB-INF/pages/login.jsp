@@ -26,7 +26,7 @@
 
 	<div id="wrapper" class="container">
 		
-		<c:url var="loginUrl" value="/login" />
+		<c:url var="loginUrl" value="/j_spring_security_check" />
 		<form action="${loginUrl}" method="post" class="form-horizontal">
 			<fieldset>
 
@@ -47,7 +47,7 @@
 					<label class="col-md-4 control-label" for="password">Password</label>
 					<div class="col-md-4">
 						<input id="password" name="password" type="text"
-							placeholder="Password" class="form-control input-md" required="">
+							placeholder="Password" class="form-control input-md" required="" type="password">
 							<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />
 					</div>
@@ -66,20 +66,51 @@
 
 
 
+ <form:form class="form-horizontal" id="registration" action="register.htm" method="POST" modelAttribute="Registration">
 
-		<form class="form-horizontal">
 			<fieldset>
 
 				<!-- Form Name -->
 				<h4>Don't fall back! Register</h4>
 
-				<!-- Text input-->
+				<!-- Email-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="fn">Email</label>
+					<label class="col-md-4 control-label" for="email">Email</label>
 					<div class="col-md-4">
-						<input id="fn" name="fn" type="text" placeholder="Email"
-							class="form-control input-md" required="">
+						<form:input path="email" value="${Registration.email}" id="email" name="email" type="text" placeholder="Email"
+							class="form-control input-md" required="required"/>
 					</div>
+					<form:errors path="email" element="div"/>
+				</div>
+				
+				<!-- Username-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="username">Username</label>
+					<div class="col-md-4">
+						<form:input path="username" value="${Registration.username}" id="username" name="username" type="text" placeholder="Username"
+							class="form-control input-md" required="required"/>
+					</div>
+					<form:errors path="username" element="div"/>
+				</div>
+				
+				<!-- Password-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="email">Password</label>
+					<div class="col-md-4">
+						<form:input path="password" value="${Registration.password}" id="password" name="password" type="password" placeholder="Password"
+							class="form-control input-md" required="required"/>
+					</div>
+					<form:errors path="password" element="div"/>
+				</div>
+				
+				<!-- Password verification -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="email">Password Verification</label>
+					<div class="col-md-4">
+						<form:input path="passwordVerification" value="${Registration.passwordVerification}" id="passwordVerification" name="passwordVerification" type="password" placeholder="Password Verification"
+							class="form-control input-md" required="required"/>
+					</div>
+					<form:errors path="passwordVerification" element="div"/>
 				</div>
 
 				<!-- Text input-->
@@ -88,7 +119,7 @@
 						birth</label>
 					<div class="col-md-4">
 						<input id="ln" name="ln" type="text" placeholder="Date of birth"
-							class="form-control input-md" required="">
+							class="form-control input-md" required="required">
 					</div>
 				</div>
 
@@ -97,7 +128,7 @@
 					<label class="col-md-4 control-label" for="cmpny">Street</label>
 					<div class="col-md-4">
 						<input id="cmpny" name="cmpny" type="text" placeholder="Street"
-							class="form-control input-md" required="">
+							class="form-control input-md" required="required">
 					</div>
 				</div>
 
@@ -106,7 +137,7 @@
 					<label class="col-md-4 control-label" for="city">City</label>
 					<div class="col-md-4">
 						<input id="city" name="city" type="text" placeholder="city"
-							class="form-control input-md" required="">
+							class="form-control input-md" required="required">
 					</div>
 				</div>
 
@@ -137,7 +168,7 @@
 				</div>
 
 			</fieldset>
-		</form>
+		</form:form>
 
 
 
