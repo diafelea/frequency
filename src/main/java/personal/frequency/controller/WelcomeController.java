@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import personal.frequency.model.User;
+import personal.frequency.model.types.Country;
 import personal.frequency.service.UserService;
 
 @Controller
@@ -35,6 +36,7 @@ public class WelcomeController {
 		if (logout != null) {
 			model.addObject("msg", "You've been logged out successfully.");
 		}
+		model.addObject("countries", Country.values());
 		return model;
 	}
 
@@ -58,6 +60,7 @@ public class WelcomeController {
 			model.addObject("msg", "Congratulations, you can now login to your account!");
 			userService.save(user);
 		}
+		model.addObject("countries", Country.values());
 		return model;
 	}
 }

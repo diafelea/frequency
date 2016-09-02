@@ -1,0 +1,7 @@
+package personal.frequency.model.types;
+
+public enum Country {
+
+	Afghanistan, Albania, Algeria, Andorra, Angola, Argentina, Armenia, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bhutan, Bolivia, Bosnia, Botswana, Brazil, Brunei, Bulgaria, Burundi, Cambodia, Cameroon, Canada, Chad, Chile, China, Colombia, Comoros, Congo, Croatia, Cuba, Cyprus, Czech, Denmark, Djibouti, Dominica, Ecuador, Egypt, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, Gabon, Gambia, Georgia, Germany, Ghana, Greece, Grenada, Guatemala, Guinea, Guyana, Haiti, Honduras, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Israel, Italy, Jamaica, Japan, Jordan, Latvia, Lebanon, Libya, Liechtenstein, Lithuania, Luxembourg, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Mexico, Moldova, Monaco, Montenegro, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, NewZealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Paraguay, Peru, Philippines, Poland, Portugal, Qatar, Romania, Russia, Samoa, Senegal, Serbia, Seychelles, Singapore, Slovakia, Slovenia, Somalia, SouthAfrica, Spain, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, TimorLeste, Togo, Tonga, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, England, SUA, Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Gibraltar, Kosovo, Macau;
+
+}
