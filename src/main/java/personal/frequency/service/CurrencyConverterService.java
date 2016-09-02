@@ -7,7 +7,7 @@ import personal.frequency.model.CurrencyConverter;
 
 public interface CurrencyConverterService {
 
-	public double getConversionRate(String fromCurrency, String toCurrency);
+	public double getConversionRate(String fromCurrency, String toCurrency, String date);
 	
 	public Set<String> getCurrencies(String fromCurrency);
 	

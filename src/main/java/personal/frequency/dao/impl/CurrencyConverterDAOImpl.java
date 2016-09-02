@@ -16,6 +16,8 @@ import personal.frequency.utils.CustomHibernateDaoSupport;
 @Repository
 public class CurrencyConverterDAOImpl extends CustomHibernateDaoSupport implements CurrencyConverterDAO {
 
+	private static final int MAX_ROWS = 10;
+	
 	@Override
 	public void save(CurrencyConverter currencyConverter) {
 		getHibernateTemplate().save(currencyConverter);
@@ -29,9 +31,10 @@ public class CurrencyConverterDAOImpl extends CustomHibernateDaoSupport implemen
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
 				StringBuilder hql = new StringBuilder();
 				hql.append(" select res from CurrencyConverter res ");
-				hql.append(" where res.username = :usernameParam");
+				hql.append(" where res.username = :usernameParam order by res.searchDate DESC");
 				Query query = session.createQuery(hql.toString());
 				query.setParameter("usernameParam", username);
+				query.setMaxResults(MAX_ROWS);
 				return query.list();
 			}
 		});

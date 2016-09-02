@@ -15,21 +15,18 @@ public class URLUtils {
 		try {
 			obj = new URL(url);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		HttpURLConnection con = null;
 		try {
 			con = (HttpURLConnection)obj.openConnection();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
 		try {
 			con.setRequestMethod("GET");
 		} catch (ProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -37,7 +34,6 @@ public class URLUtils {
 		try {
 			responseCode = con.getResponseCode();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("\nSending 'GET' request to URL : " + url);
@@ -47,7 +43,6 @@ public class URLUtils {
 		try {
 			in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String inputLine;
@@ -58,13 +53,11 @@ public class URLUtils {
 				response.append(inputLine);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			in.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

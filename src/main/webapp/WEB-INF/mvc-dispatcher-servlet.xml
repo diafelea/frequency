@@ -11,6 +11,7 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
+	<mvc:annotation-driven/>
 	<context:component-scan base-package="personal.frequency" />
 
 	<bean id="ViewResolver"
@@ -30,12 +31,6 @@
  
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"></bean>
     
-    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>
-	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-	    <!-- Turn off working out content type based on URL file extension, should fall back to looking at the Accept headers -->
-	    <property name="favorPathExtension" value="false" />
-	</bean>
-
 	<!-- Database Configuration -->
 	<import resource="/resources/database/DataSource.xml" />
 	<import resource="/resources/database/Hibernate.xml" />

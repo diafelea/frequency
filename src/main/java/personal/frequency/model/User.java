@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.Email;
 
@@ -15,14 +16,22 @@ import org.hibernate.validator.constraints.Email;
 public class User {
 
 	@NotNull
-	@Email
+	@Email(message="Please provide a valid email address")
 	private String email;
+	@NotNull
+	@Past(message="Plase provide a valid bith date")
 	private Date dateOfBirth;
+	@NotNull
 	private String street;
+	@NotNull
 	private String city;
+	@NotNull
 	private String country;
+	@NotNull
 	private String zipCode;
+	@NotNull
 	private String username;
+	@NotNull
 	private String password;
 
 	@Column(name = "email")

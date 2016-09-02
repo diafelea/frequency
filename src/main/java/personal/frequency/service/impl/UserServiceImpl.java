@@ -1,5 +1,7 @@
 package personal.frequency.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,11 @@ public class UserServiceImpl implements UserService {
 	public void save(User user) {
 		userDAO.save(user);
 		roleService.save(Role.addUserRole(user, false));
+	}
+
+	public boolean accountAlreadyExists(String username, String email) {
+		List<User> users = userDAO.accountAlreadyExists(username, email);
+		return users != null && !users.isEmpty() ? true : false;
 	}
 
 }

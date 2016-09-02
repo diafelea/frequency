@@ -30,27 +30,25 @@ public class CurrencyConverterController {
 	@RequestMapping(value = "/currencyConverter", method = RequestMethod.GET)
 	public ModelAndView about() {
 		ModelAndView model = new ModelAndView("currencyConverter", "CurrencyConverter", new CurrencyConverter());
-		model.addObject("currencies", getCurrencies());
-		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		model.addObject("results", currencyConverterService.getConversionResults(auth.getName())); 
+		model.addObject("results", currencyConverterService.getConversionResults(auth.getName()));
+		model.addObject("currencies", getCurrencies());
 		return model;
 	}
 
 	@RequestMapping(value = "/convert", method = RequestMethod.POST)
-	public ModelAndView convert(@Valid @ModelAttribute CurrencyConverter currencyConverter, BindingResult bindingResult) throws Exception {
+	public ModelAndView convert(@Valid @ModelAttribute("CurrencyConverter") CurrencyConverter currencyConverter, BindingResult bindingResult) throws Exception {
 		ModelAndView model = new ModelAndView("currencyConverter");
-		BigDecimal rate = new BigDecimal(currencyConverterService.getConversionRate(currencyConverter.getFromCurrency(), currencyConverter.getToCurrency())).setScale(4, RoundingMode.HALF_UP);
-
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		currencyConverter.setUsername(auth.getName());
-		
-		currencyConverter.setConvertedAmount(currencyConverter.getAmountToConvert().multiply(rate).setScale(4, RoundingMode.HALF_UP));
-		currencyConverterService.saveSearchResults(currencyConverter);
-		
-		model.addObject("currencies", getCurrencies());
-		model.addObject("results", currencyConverterService.getConversionResults(auth.getName())); 
+		if (currencyConverter.getAmountToConvert() != null && !bindingResult.hasErrors()) {
+			BigDecimal rate = new BigDecimal(currencyConverterService.getConversionRate(currencyConverter.getFromCurrency(), currencyConverter.getToCurrency(), currencyConverter.getDate())).setScale(4, RoundingMode.HALF_UP);
+			currencyConverter.setConvertedAmount(currencyConverter.getAmountToConvert().multiply(rate).setScale(4, RoundingMode.HALF_UP));
+			currencyConverter.setUsername(auth.getName());
+			currencyConverterService.saveSearchResults(currencyConverter);
+		}
 		model.addObject("CurrencyConverter", currencyConverter);
+		model.addObject("results", currencyConverterService.getConversionResults(auth.getName()));
+		model.addObject("currencies", getCurrencies());
 		return model;
 	}
 

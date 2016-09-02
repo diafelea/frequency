@@ -1,6 +1,8 @@
 package personal.frequency.model;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -11,7 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.util.StringUtils;
+
+import personal.frequency.utils.DateUtils;
 
 @Entity
 @Table(name = "currencyConverter", catalog = "frequency")
@@ -21,17 +28,13 @@ public class CurrencyConverter {
 	private String fromCurrency;
 	private String toCurrency;
 	@NotNull(message = "Add the amount to convert")
+	@Min(value=1, message="Amount must be positive")
 	private BigDecimal amountToConvert;
 	private BigDecimal convertedAmount;
-	private Date date;
+	private String date;
+	private Date searchDate;
 	private String username;
 	private Map<String, Double> rates;
-
-	public CurrencyConverter() {
-		if (date == null) {
-			date = new Date();
-		}
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -81,12 +84,24 @@ public class CurrencyConverter {
 	}
 
 	@Column(name = "date")
-	public Date getDate() {
+	public String getDate() {
+		if (!StringUtils.hasText(date)) {
+			date = new SimpleDateFormat(DateUtils.DATE_FORMAT_LONG).format(Calendar.getInstance().getTime());
+		}
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
+	}
+
+	@Column(name = "searchdate")
+	public Date getSearchDate() {
+		return searchDate;
+	}
+
+	public void setSearchDate(Date searchDate) {
+		this.searchDate = searchDate;
 	}
 
 	@Column(name = "username")

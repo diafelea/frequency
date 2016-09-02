@@ -48,12 +48,16 @@ public class WelcomeController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(@Valid @ModelAttribute User user, BindingResult bindingResult) {
-		//ModelAndView model = new ModelAndView("currencyConverter", "CurrencyConverter", new CurrencyConverter());
-		if (!bindingResult.hasErrors()) {
-			userService.save(user);
-			return "redirect:/currencyConverter.htm";
+	public ModelAndView register(@Valid @ModelAttribute("User") User user, BindingResult bindingResult) {
+		ModelAndView model = new ModelAndView("login", "User", user);
+		if (userService.accountAlreadyExists(user.getUsername(), user.getEmail())) {
+			model.addObject("error", "Account already exists!");
+			return  model;
 		}
-		return "redirect:/login?logout";
+		if (!bindingResult.hasErrors()) {
+			model.addObject("msg", "Congratulations, you can now login to your account!");
+			userService.save(user);
+		}
+		return model;
 	}
 }

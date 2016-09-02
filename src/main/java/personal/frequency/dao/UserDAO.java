@@ -1,9 +1,13 @@
 package personal.frequency.dao;
 
+import java.util.List;
+
 import personal.frequency.model.User;
 
 public interface UserDAO {
 
-	void save(User user);
+	public void save(User user);
+	
+	public List<User> accountAlreadyExists(final String username, final String email);
 
 }
