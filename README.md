@@ -6,7 +6,7 @@ http://frequency-wermvc.rhcloud.com/frequency/login.htm
 
 For a quick test user credentials can be used: superuser/superuser 
 
-For a local worling copy:
+For a local working copy:
 
 1. Clone the project using the GitHub repository URL: 
    https://github.com/diafelea/frequency 
@@ -59,7 +59,7 @@ For a local worling copy:
 	  PRIMARY KEY (`id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8;
 
-4. Go to: /frequency/src/main/webapp/WEB-INF/resources/properties/database.properties and update with the proper credentials of your own mysql instance if not root/root already...
+4. Go to: /frequency/src/main/webapp/WEB-INF/resources/properties/database.properties and update with the proper credentials of your own mysql instance
 
 5. Open command line in the frequency folder containing the pom.xml file and run: mvn clean install 
 
