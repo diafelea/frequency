@@ -31,7 +31,7 @@ public class CurrencyConverterDAOImpl extends CustomHibernateDaoSupport implemen
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
 				StringBuilder hql = new StringBuilder();
 				hql.append(" select res from CurrencyConverter res ");
-				hql.append(" where res.username = :usernameParam order by res.searchDate DESC");
+				hql.append(" where res.username = :usernameParam order by res.id DESC");
 				Query query = session.createQuery(hql.toString());
 				query.setParameter("usernameParam", username);
 				query.setMaxResults(MAX_ROWS);

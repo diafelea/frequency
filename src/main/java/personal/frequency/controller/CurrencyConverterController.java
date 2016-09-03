@@ -48,12 +48,16 @@ public class CurrencyConverterController {
 		}
 		model.addObject("CurrencyConverter", currencyConverter);
 		model.addObject("results", currencyConverterService.getConversionResults(auth.getName()));
-		model.addObject("currencies", getCurrencies());
+		model.addObject("currencies", getCurrencies(currencyConverter.getFromCurrency()));
 		return model;
 	}
 
 	private Set<String> getCurrencies() {
 		return currencyConverterService.getCurrencies(BASE_CURRENCY);
+	}
+	
+	private Set<String> getCurrencies(String baseCurrency) {
+		return currencyConverterService.getCurrencies(baseCurrency);
 	}
 
 }

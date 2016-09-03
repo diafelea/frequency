@@ -31,7 +31,10 @@ public class CurrencyConverterServiceImpl implements CurrencyConverterService {
 	@Override
 	public double getConversionRate(String fromCurrency, String toCurrency, String date) {
 		Map<String, Double> rates = getRates(fromCurrency, date);
-		double rate = rates.get(toCurrency);
+		double rate = 1;
+		if (rates.containsKey(toCurrency)) {
+			rate = rates.get(toCurrency);
+		}
 		return rate;
 	}
 

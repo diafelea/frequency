@@ -98,7 +98,7 @@
 		        <label for="">Currency I Have:</label>
 				<form:select path="fromCurrency" class="form-control">
 				    <option selected>EUR</option>
-					<form:options items="${currencies}" value="${CurrencyConverter.fromCurrency}" />
+					<form:options items="${currencies}"  />
 				</form:select>
 		       </div> 
 		      </div>
@@ -108,7 +108,7 @@
 		        <label for="">Currency I Want:</label>
 		        <form:select path="toCurrency" class="form-control">
 					<option selected>USD</option>
-					<form:options items="${currencies}" value="${CurrencyConverter.toCurrency}"/>
+					<form:options items="${currencies}" />
 				</form:select>
 		       </div> 
 		      </div>
