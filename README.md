@@ -1,5 +1,5 @@
 # frequency - Currency converter
-A protected currency converter application using a public currency converter API: http://api.fixer.io/latest?base=EUR based and SpringMVC and Hibernate with a MySql database.
+A protected currency converter application using a public currency converter API: http://api.fixer.io/latest?base=EUR based on SpringMVC and Hibernate with a MySql database.
 
 Please check the working online app hosted on OpenShift by accessing:
 http://frequency-wermvc.rhcloud.com/frequency/login.htm
