@@ -7,6 +7,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
  <meta charset="UTF-8">
+ <title>Frequency</title>
  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />

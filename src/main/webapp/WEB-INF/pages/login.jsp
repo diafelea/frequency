@@ -4,7 +4,7 @@
 <html lang="en" data-ng-app="ForEx">
 <head>
  <meta charset="UTF-8">
- <title>Currency Converter in Angular</title>
+ <title>Frequency</title>
  <!-- Latest compiled and minified CSS & JS -->
  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
@@ -156,17 +156,11 @@
 
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="country">Country</label>
-					
 					<div class="col-md-4">
 						<form:select path="country" class="form-control">
 							<form:options items="${countries}" value="${User.country}" />
 						</form:select>
 					</div>
-					
-					<%-- <div class="col-md-4">
-						<form:input id="country" path="country" value="${User.country}" placeholder="Country" class="form-control input-md" required="required"/>
-						<font color="red"><form:errors path="country"/></font>
-					</div> --%>
 				</div>
 
 				<div class="form-group">
